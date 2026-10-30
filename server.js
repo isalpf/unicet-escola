@@ -1,6 +1,7 @@
 const express = require('express');
 const estudanteRoutes = require('./src/routes/estudanteRoutes');
 const cursoRoutes = require('./src/routes/cursoRoutes');
+const disciplinaRoutes = require('./src/routes/disciplinaRoutes');
 
 const app = express();
 const PORT = 3000;
@@ -11,6 +12,7 @@ app.use(express.json());
 // Registra as rotas de aplicação
 app.use('/estudantes', estudanteRoutes);
 app.use('/cursos', cursoRoutes);
+app.use('/disciplinas', disciplinaRoutes);
 
 // Rota raiz para conferência básica
 app.get('/', (req, res) => {
