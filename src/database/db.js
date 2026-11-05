@@ -35,6 +35,19 @@ db.serialize(() => {
       curso_id INTEGER NOT NULL, FOREIGN KEY (curso_id) REFERENCES cursos(id)
     )
   `);
+
+  db.run(`
+    CREATE TABLE IF NOT EXISTS matriculas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    estudante_id INTEGER NOT NULL,
+    curso_id INTEGER NOT NULL, 
+    numeroMatricula TEXT NOT NULL UNIQUE,
+    dataMatricula TEXT NOT NULL, 
+    status TEXT DEFAULT 'ATIVA',
+    FOREIGN KEY (estudante_id) REFERENCES estudantes(id),
+    FOREIGN KEY (curso_id) REFERENCES cursos(id) 
+    )
+ `);
 });
 
 module.exports = db;
