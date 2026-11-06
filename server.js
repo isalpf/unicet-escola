@@ -3,6 +3,8 @@ const estudanteRoutes = require('./src/routes/estudanteRoutes');
 const cursoRoutes = require('./src/routes/cursoRoutes');
 const disciplinaRoutes = require('./src/routes/disciplinaRoutes');
 const matriculaRoutes = require('./src/routes/matriculaRoutes');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./src/docs/swagger-output.json');
 
 const app = express();
 const PORT = 3000;
@@ -15,6 +17,9 @@ app.use('/estudantes', estudanteRoutes);
 app.use('/cursos', cursoRoutes);
 app.use('/disciplinas', disciplinaRoutes);
 app.use('/matriculas', matriculaRoutes);
+
+// Disponibiliza a rota de documentação visual
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Rota raiz para conferência básica
 app.get('/', (req, res) => {
