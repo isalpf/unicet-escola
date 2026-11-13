@@ -3,6 +3,8 @@ const db = require('../database/db');
 class NotasController {
   // Listar Todos
   static listarTodos(req, res) {
+    // #swagger.tags = ['Notas']
+    // #swagger.summary = 'Lista todas as notas cadastradas'
     db.all("SELECT * FROM notas", [], (err, rows) => {
       if (err) return res.status(500).json({ erro: err.message });
       return res.status(200).json(rows);
@@ -25,6 +27,9 @@ class NotasController {
     if (!matricula_id || !disciplina_id) {
       return res.status(400).json({ erro: "matricula_id e disciplina_id são obrigatórios." });
     }
+    if (valor < 0 || valor > 10) {
+      return res.status(400).json({ erro: "A nota deve estar entre 0.0 e 10.0." });
+    }
 
     const sql = `INSERT INTO notas (matricula_id, disciplina_id, valor, tipoAvaliacao, dataLancamento) VALUES (?, ?, ?, ?, ?)`;
     db.run(sql, [matricula_id, disciplina_id, valor, tipoAvaliacao, dataLancamento], function(err) {
@@ -46,6 +51,9 @@ class NotasController {
   static editar(req, res) {
     const { id } = req.params;
     const { matricula_id, disciplina_id, valor, tipoAvaliacao, dataLancamento } = req.body;
+    if (valor < 0 || valor > 10) {
+      return res.status(400).json({ erro: "A nota deve estar entre 0.0 e 10.0." });
+    }
 
     const sql = `UPDATE notas SET matricula_id = ?, disciplina_id = ?, valor = ?, tipoAvaliacao = ?, dataLancamento = ? WHERE id = ?`;
     db.run(sql, [matricula_id, disciplina_id, valor, tipoAvaliacao, dataLancamento, id], function(err) {

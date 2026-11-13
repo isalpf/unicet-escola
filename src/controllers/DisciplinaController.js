@@ -3,6 +3,8 @@ const db = require('../database/db');
 class DisciplinaController {
   // Listar Todos
   static listarTodos(req, res) {
+    // #swagger.tags = ['Disciplinas']
+    // #swagger.summary = 'Lista todas as disciplinas cadastradas'
     db.all("SELECT * FROM disciplinas", [], (err, rows) => {
       if (err) return res.status(500).json({ erro: err.message });
       return res.status(200).json(rows);

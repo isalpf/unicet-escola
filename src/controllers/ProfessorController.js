@@ -3,6 +3,8 @@ const db = require('../database/db');
 class ProfessorController {
   // Listar Todos
   static listarTodos(req, res) {
+    // #swagger.tags = ['Professores']
+    // #swagger.summary = 'Lista todos os professores cadastrados'
     db.all("SELECT * FROM professores", [], (err, rows) => {
       if (err) return res.status(500).json({ erro: err.message });
       return res.status(200).json(rows);
@@ -28,7 +30,12 @@ class ProfessorController {
 
     const sql = `INSERT INTO professores (nome, email, titulacao, telefone) VALUES (?, ?, ?, ?)`;
     db.run(sql, [nome, email, titulacao, telefone], function(err) {
-      if (err) return res.status(500).json({ erro: err.message });
+      if (err) {
+        if (err.code === 'SQLITE_CONSTRAINT') {
+          return res.status(409).json({ erro: "Já existe um professor cadastrado com este e-mail." });
+        }
+        return res.status(500).json({ erro: err.message });
+      }
 
       // this.lastID retorna o ID gerado pelo banco
       return res.status(201).json({

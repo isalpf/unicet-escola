@@ -3,6 +3,18 @@ const db = require('../database/db');
 class EstudanteController {
   // Listar Todos
   static listarTodos(req, res) {
+    // #swagger.tags = ['Estudantes']
+    // #swagger.summary = 'Lista todos os estudantes cadastrados'
+     const { nome } = req.query;
+
+     if (nome) {
+      const sql = "SELECT * FROM estudantes WHERE nome LIKE ?";
+      return db.all(sql, [`%${nome}%`], (err, rows) => {
+      if (err) return res.status(500).json({ erro: err.message });
+      return res.status(200).json(rows);
+      });
+    }
+
     db.all("SELECT * FROM estudantes", [], (err, rows) => {
       if (err) return res.status(500).json({ erro: err.message });
       return res.status(200).json(rows);

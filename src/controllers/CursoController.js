@@ -3,6 +3,8 @@ const db = require('../database/db');
 class CursoController {
   // Listar Todos
   static listarTodos(req, res) {
+    // #swagger.tags = ['Cursos']
+    // #swagger.summary = 'Lista todos os Cursos cadastrados'
     db.all("SELECT * FROM cursos", [], (err, rows) => {
       if (err) return res.status(500).json({ erro: err.message });
       return res.status(200).json(rows);

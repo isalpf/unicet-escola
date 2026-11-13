@@ -3,6 +3,8 @@ const db = require('../database/db');
 class MatriculaController {
   // Listar Todos
   static listarTodos(req, res) {
+    // #swagger.tags = ['Matriculas']
+    // #swagger.summary = 'Lista todas as matrículas cadastradas'
     db.all("SELECT * FROM matriculas", [], (err, rows) => {
       if (err) return res.status(500).json({ erro: err.message });
       return res.status(200).json(rows);

@@ -23,7 +23,18 @@
     },
     "/estudantes/": {
       "get": {
+        "tags": [
+          "Estudantes"
+        ],
+        "summary": "Lista todos os estudantes cadastrados",
         "description": "",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -156,6 +167,10 @@
     },
     "/cursos/": {
       "get": {
+        "tags": [
+          "Cursos"
+        ],
+        "summary": "Lista todos os Cursos cadastrados",
         "description": "",
         "responses": {
           "200": {
@@ -289,6 +304,10 @@
     },
     "/disciplinas/": {
       "get": {
+        "tags": [
+          "Disciplinas"
+        ],
+        "summary": "Lista todas as disciplinas cadastradas",
         "description": "",
         "responses": {
           "200": {
@@ -428,6 +447,10 @@
     },
     "/matriculas/": {
       "get": {
+        "tags": [
+          "Matriculas"
+        ],
+        "summary": "Lista todas as matrículas cadastradas",
         "description": "",
         "responses": {
           "200": {
@@ -573,6 +596,10 @@
     },
     "/professores/": {
       "get": {
+        "tags": [
+          "Professores"
+        ],
+        "summary": "Lista todos os professores cadastrados",
         "description": "",
         "responses": {
           "200": {
@@ -614,6 +641,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
           },
           "500": {
             "description": "Internal Server Error"
@@ -712,6 +742,10 @@
     },
     "/notas/": {
       "get": {
+        "tags": [
+          "Notas"
+        ],
+        "summary": "Lista todas as notas cadastradas",
         "description": "",
         "responses": {
           "200": {
@@ -823,6 +857,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
